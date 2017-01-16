@@ -1,0 +1,71 @@
+﻿<!doctype html>
+<!-- Assignage du mode angulaire -->
+<html ng-app="giaTodo">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Version Mobile -->
+
+    <title>Ma to-do liste</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- Charge Bootstrap -->
+    <style>
+        html                    { overflow-y:scroll; background-color: #471F67; font-family: 'Comic Sans MS', cursive; }
+        body                    { padding-top:150px; background-color: #471F67;font-family: 'Comic Sans MS', cursive; }
+        #todo-list              { margin-bottom:100px; background-color: #B7A5D1;font-family: 'Comic Sans MS', cursive; width: 400px;margin-left: 360px; }
+        h1                      {font-family: 'Comic Sans MS', cursive; }
+        .labelperso             {color : orange;}
+       .jumbotron               {width: 400px;margin-left: 360px;background-color: #B7A5D1;}
+
+
+    </style>
+    
+    <!-- Usage des scripts -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- Charge jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- Charge angular -->
+    <script src="core.js"></script>
+</head>
+
+<!-- Usage des controleurs et obtention de tous les éléments de la liste -->
+<body ng-controller="mainController">
+    <div class="container">
+
+        <!-- Header et todo count -->
+        <div class="jumbotron text-center">
+            <h1>Liste à faire<span class="label label-info labelperso ">{{todos.length }}</span></h1>
+        </div>
+
+        <!-- Liste Todo -->
+        <div id="todo-list" class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+
+                <!-- Boucle sur les éléments dans $scope.todos -->
+                <div class="checkbox" ng-repeat="todo in todos">
+                    <label>
+                        <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+                    </label>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Formulaire de création d'élément -->
+        <div id="todo-form" class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                    <div class="form-group">
+
+                        <!-- Lie la valeur à formData.text dans Angular -->
+                        <input type="text" class="form-control input-lg text-center" placeholder="chose à faire..." ng-model="formData.text">
+                    </div>
+
+                    <!-- createToDo() crééra un nouvelle élément -->
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Ajouter à ma liste</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
